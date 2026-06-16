@@ -1,0 +1,50 @@
+CREATE TABLE IF NOT EXISTS admin_accounts (
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(64) NOT NULL UNIQUE,
+  password VARCHAR(120) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS events (
+  id BIGINT NOT NULL PRIMARY KEY,
+  category VARCHAR(64),
+  sub_event VARCHAR(255),
+  title VARCHAR(255),
+  event_date VARCHAR(64) NOT NULL,
+  location VARCHAR(255) NOT NULL,
+  total_tickets INT NOT NULL DEFAULT 0,
+  image_key VARCHAR(64) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS event_plans (
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  event_id BIGINT NOT NULL,
+  tier_name VARCHAR(120) NOT NULL,
+  price INT NOT NULL DEFAULT 0,
+  features_text TEXT,
+  sort_order INT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS users (
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(120) NOT NULL,
+  registered_at VARCHAR(64) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS bookings (
+  id VARCHAR(64) NOT NULL PRIMARY KEY,
+  guest_name VARCHAR(120) NOT NULL,
+  guest_email VARCHAR(255) NOT NULL,
+  phone VARCHAR(20) NOT NULL,
+  tickets INT NOT NULL,
+  event_id BIGINT NOT NULL,
+  event_title VARCHAR(255) NOT NULL,
+  category VARCHAR(64),
+  event_date VARCHAR(64) NOT NULL,
+  event_location VARCHAR(255) NOT NULL,
+  plan_tier VARCHAR(120),
+  plan_price INT,
+  account_email VARCHAR(255) NOT NULL,
+  booked_at VARCHAR(64) NOT NULL
+);
